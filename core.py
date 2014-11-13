@@ -16,9 +16,9 @@ if __name__=="__main__":
     args = parser.parse_args()
     if args.debug:
         print("Running in debug mode")
-        #set logging level
+        logging.basicConfig(filename='./Logs/Core_.'+str(time.clock())+'.log', level=logging.DEBUG)
     elif args.verbose:
         print("Running in verbose mode")
-        #set logging level
+        logging.basicConfig(filename='./Logs/Core_.'+str(time.clock())+'.log', level=logging.DEBUG)
     else:
         print("Out\n")

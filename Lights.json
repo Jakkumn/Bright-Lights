@@ -3,7 +3,7 @@
         "IP": "0.0.0.0",
         "Port": "0000",
         "Connected Lights": 0
-    }
+    },
     "Lights":{
         "Example_Light":{
             "Multi-Color": true,

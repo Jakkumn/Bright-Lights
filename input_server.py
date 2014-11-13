@@ -3,7 +3,9 @@
 
 import argparse
 import logging
-import time
+import logging.config
+#import time
+import json
 from bottle import run, get, post
 
 light_info = 'Something' #this will be the process object handled by the multiprocess manager to allow syncing of dictionaries across modules. The dictionary will contain the light information.
@@ -48,7 +50,9 @@ if __name__ == "__main__":
     if args.debug:
         #runs server in debug mode and stores a debug file documenting what happened during the test
         #need to setup a logging setup file
-        logging.basicConfig(filename='./Logs/HTTP_Server.'+str(time.clock())+'.log', level=logging.DEBUG)
+        with open("logging_config.json", 'rt') as configurator:
+            config = json.load(configurator)
+        logging.config.dictConfig(config)
         logging.info("HTTP server running in debug mode. Using: localhost:8080")
         run(host="localhost", port=8080, debug=True)
     else:
