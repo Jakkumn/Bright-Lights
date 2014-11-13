@@ -8,7 +8,8 @@ import logging.config
 import json
 from bottle import run, get, post
 
-light_info = 'Something' #this will be the process object handled by the multiprocess manager to allow syncing of dictionaries across modules. The dictionary will contain the light information.
+
+light_info = None  #this will be the process object handled by the multiprocess manager to allow syncing of dictionaries across modules. The dictionary will contain the light information.
 
 @get('/tacos')
 def tacos_are_great():
@@ -16,26 +17,36 @@ def tacos_are_great():
     return "Tacos are great"
 
 @get('/info/lights')
-def display_lights_info(light_info):
+def display_lights_info():
     #displays all lights and what they are bound to
     logging.info("*->Request to show all lights")
-    logging.info("*--->Returned: "+str(light_info))
-    return "Success"
+    try:
+        return light_info["Lights"]["0"]
+    except KeyError:
+        return "No Lights currently connected"
+    except:
+        return "Unknown failure"
+
 
 @get('/info/lights/<id:float>')
-def display_light_info(id, light_info):
+def display_light_info(id):
     #needs access to the previous state database
+    #note: all items in Lights.json should be of float type. So light 1 is actually 1.0, allows for handling sub lights
     logging.info("*->Request to light: "+str(id))
     logging.info("*--->Returned: "+str(light_info))
-    return "Success"
+    try:
+        return light_info["Lights"][str(id)]
+    except KeyError:
+        return "No light with connection number: "+str(id)
 
 #Use http/POST for updating lights to new values
     #need to investigate if just appending info to the url is the best way to set light info
 
 @post('/set/lights/<id:float>')
-def update_light_info(id, light_info):
+def update_light_info(id):
     #updates database? should communicate with something to notify requested change
     logging.info("*->Request to change light: "+str(id))
+    return "Not implemented yet"
     #modify spot in light info, manager will handle updating
     #if success return true
     #else false
@@ -54,6 +65,8 @@ if __name__ == "__main__":
             config = json.load(configurator)
         logging.config.dictConfig(config)
         logging.info("HTTP server running in debug mode. Using: localhost:8080")
+        global light_info
+        light_info = json.load(open("Lights.json", 'r')) #loads a dummy Lights.json file, no writing capabilities yet
         run(host="localhost", port=8080, debug=True)
     else:
         print("HTTP server running in normal mode\n")

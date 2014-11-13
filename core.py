@@ -3,7 +3,8 @@
 
 #imports
 import argparse
-#import logging
+import logging
+import json
 
 #Multiprocess off the input server and watch for updates to the shared 'light' file
 #if change, add work request to light_changer with the changes
@@ -11,14 +12,12 @@ import argparse
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-v", "--verbose", action="store_true", help="Runs Light Base in a verbose mode")
     parser.add_argument("-d", "--debug", action="store_true",help="Runs Light Base in a debug mode")
     args = parser.parse_args()
     if args.debug:
-        print("Running in debug mode")
-        logging.basicConfig(filename='./Logs/Core_.'+str(time.clock())+'.log', level=logging.DEBUG)
-    elif args.verbose:
-        print("Running in verbose mode")
-        logging.basicConfig(filename='./Logs/Core_.'+str(time.clock())+'.log', level=logging.DEBUG)
+        with open("logging_config.json", 'rt') as configurator:
+            config = json.load(configurator)
+        logging.config.dictConfig(config)
+
     else:
         print("Out\n")
