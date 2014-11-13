@@ -5,9 +5,8 @@
 import argparse
 #import logging
 
-#wait for request to pop in from http handler
-#operate depending on that request
-#request should contain: light(?), intensity, hue
+#Multiprocess off the input server and watch for updates to the shared 'light' file
+#if change, add work request to light_changer with the changes
 
 
 if __name__=="__main__":

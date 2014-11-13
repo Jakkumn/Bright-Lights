@@ -1,0 +1,16 @@
+{
+    "Server_Info":{
+        "IP": "0.0.0.0",
+        "Port": "0000",
+        "Connected Lights": 0
+    }
+    "Lights":{
+        "Example_Light":{
+            "Multi-Color": true,
+            "Brightness": 100,
+            "Fade_Time": 10,
+            "Hex_Color": "FF0000",
+            "Allow_Onboard_Sensors": false
+        }
+    }
+}
