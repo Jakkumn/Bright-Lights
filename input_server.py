@@ -4,27 +4,29 @@
 import argparse
 import logging
 import time
-from bottle import route, run
+from bottle import route, run, get
 
-@route('/tacos')
+@get('/tacos')
 def hello():
+    #for the lolz
     return "Tacos are great"
 
-@route('/info/lights')
-def display_lights_info()
+@get('/info/lights')
+def display_lights_info():
     #displays all lights and what they are bound to
     logging.info("*->Request to show all lights")
     logging.info("*--->Returned: "+str("something here"))
     return "Success"
 
-@route('/info/lights/<id:int>')
+@get('/info/lights/<id:float>')
 def display_light_info(id):
     #needs access to the previous state database
     logging.info("*->Request to light: "+str(id))
     logging.info("*--->Returned: "+str("something here"))
     return "Success"
 
-
+#Use http/POST for updating lights to new values
+    #need to investigate if just appending info to the url is the best way to set light info
 
 
 
@@ -33,8 +35,9 @@ if __name__=="__main__":
     parser.add_argument("-d", "--debug", action="store_true", help="Runs the server locally with debug")
     args = parser.parse_args()
     if args.debug:
-        #runs server in debug mode and stores a debug file documenting what happend during the test
-        logging.basicConfig(filename='HTTP_Server.'+str(time.clock()), level=logging.DEBUG)
+        #runs server in debug mode and stores a debug file documenting what happened during the test
+        #need to setup a logging setup file
+        logging.basicConfig(filename='./Logs/HTTP_Server.'+str(time.clock())+'.log', level=logging.DEBUG)
         logging.info("HTTP server running in debug mode. Using: localhost:8080")
         run(host="localhost", port=8080, debug=True)
     else:

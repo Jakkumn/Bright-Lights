@@ -1,0 +1,5 @@
+# Ignores .log files #
+*.log
+
+# Ignores files created by PyCharm if using that for IDE #
+.idea/
