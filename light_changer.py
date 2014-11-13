@@ -10,6 +10,7 @@ import argparse
     #create light intensity
     #create light hue
 
+#thoughts on being able to configure onboard the lights sensors (like a light with a motion detector, enable/disable that?)
 
 
 if __name__=="__main__":

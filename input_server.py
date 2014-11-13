@@ -4,7 +4,7 @@
 import argparse
 import logging
 import time
-from bottle import route, run, get
+from bottle import run, get, post
 
 @get('/tacos')
 def hello():
@@ -28,7 +28,14 @@ def display_light_info(id):
 #Use http/POST for updating lights to new values
     #need to investigate if just appending info to the url is the best way to set light info
 
+@post('/set/lights/<id:float>')
+def update_light_info(id):
+    #updates database? should communicate with something to notify requested change
+    logging.info("*->Request to change light: "+str(id))
+    #if success return true
+    #else false
 
+#thoughts on being able to configure onboard the lights sensors (like a light with a motion detector, enable/disable that?)
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()

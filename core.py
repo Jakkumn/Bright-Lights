@@ -21,5 +21,5 @@ if __name__=="__main__":
     elif args.verbose:
         print("Running in verbose mode")
         #set logging level
-    else
+    else:
         print("Out\n")
