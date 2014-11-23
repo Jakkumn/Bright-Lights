@@ -1,0 +1,4 @@
+Thoughts:
+    1) Bottle is a single threaded application
+        a) Use Bottle w/cherrypy to be a multi-threaded system for multi-users and minimal delay
+        b) Use SQLalchemy to handle the database instead of json, allows for compliance with cherrypy and its multithreading
