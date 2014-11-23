@@ -1,5 +1,8 @@
 #This will be used to handle incoming http requests
 #Uses the bottle python library
+#Need to add in cherrypy to allow for multi-threaded applications
+#Need to add in sql support for storing of light info
+#-->cherrypy, sqlalchemy (extra sql libs?)
 
 import argparse
 import logging
